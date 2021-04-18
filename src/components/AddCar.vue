@@ -1,12 +1,58 @@
 <template>
   <div id="contents">
     <h2 id="title">Add New Car</h2>
-    <h4>Make <input type="text" v-model="carMake" placeholder="Enter make here" /></h4>
-    <h4>Model <input type="text" v-model="carModel" placeholder="Enter model here" /></h4>
-    <h4>Year <input type="text" v-model="carYear" placeholder="Enter year here" /></h4>
-    <h4>Color <input type="text" v-model="carColor" placeholder="Enter color here" /></h4>
     <br />
-    <button v-on:click="addCar()">Submit</button>
+    <v-container fluid class="black darken-2 my-4">
+      <v-row class="purple lighten-2 ma-1" justify="center">
+        <v-sheet elevation="5" class="pa-10 my-3">
+          <v-form v-model="dataReady">
+            <v-row class="flex-column" align="end">
+              <v-col>
+                <v-text-field
+                  prepend-icon="mdi-car"
+                  type="text"
+                  label="Car Make"
+                  v-model="carMake"
+                />
+                <v-text-field
+                  type="text"
+                  label="Car Model"
+                  v-model="carModel"
+                />
+              </v-col>
+              <v-col>
+                <v-text-field
+                  prepend-icon="mdi-calendar"
+                  type="text"
+                  label="Year"
+                  v-model="carYear"
+                />
+              </v-col>
+              <v-col>
+              <v-slider
+                min="1950"
+                max="2022"
+                v-model="carYear"
+                color="blue"
+                thumb-label="carYear"
+              />
+              </v-col>
+              <v-col>
+                <v-text-field
+                  prepend-icon="mdi-spray"
+                  type="text"
+                  label="Color"
+                  v-model="carColor"
+                />
+              </v-col>
+              <v-col cols="auto">
+                <v-btn v-on:click="addCar()" outlined :disabled="!dataReady">Add Car</v-btn>
+              </v-col>
+            </v-row>
+          </v-form>
+        </v-sheet>
+      </v-row>
+    </v-container>
   </div>
 </template>
 
@@ -21,7 +67,6 @@ import { FirebaseAuth } from "@firebase/auth-types";
 import "firebase/auth";
 
 @Component
-
 export default class AddCar extends Vue {
   readonly $appDB!: FirebaseFirestore;
   readonly $appAuth!: FirebaseAuth;

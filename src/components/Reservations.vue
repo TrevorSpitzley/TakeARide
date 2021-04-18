@@ -1,6 +1,6 @@
 <template>
   <div id="contents">
-    <table>
+    <!-- <table>
       <thead>
         <th>Make</th>
         <th>Model</th>
@@ -17,7 +17,8 @@
           <td>{{x.status}}</td>
         </tr>
       </tbody>
-    </table>
+    </table> -->
+    <!-- <v-data-table :headers="hArray" :items="resArr"> </v-data-table> -->
   </div>
 </template>
 
@@ -32,17 +33,20 @@ import { FirebaseAuth } from "@firebase/auth-types";
 import "firebase/auth";
 
 @Component
-
-export default class Reservation extends Vue {
+export default class Reservations extends Vue {
   readonly $appDB!: FirebaseFirestore;
   readonly $appAuth!: FirebaseAuth;
   $router: any;
 
-  private resArr: any[] = [];
+  hArray = [
+    { text: "Car Make", value: 'carMake' },
+    { text: "Car Model", value: 'carModel' },
+  ];
+  resArr: any[] = [];
 
   //Draws data on load
-  mounted(): void{
-     this.$appDB
+  mounted(): void {
+    this.$appDB
       .collection(`users/test/seller_cars`)
       .orderBy("status") // Sort by category name
       .onSnapshot((qs: QuerySnapshot) => {
@@ -62,7 +66,6 @@ export default class Reservation extends Vue {
         });
       });
   }
-
 }
 </script>
 
