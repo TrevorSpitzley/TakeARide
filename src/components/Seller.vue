@@ -28,7 +28,7 @@ import Reservations from './Reservations.vue';
   },
 })
 
-@Component
+//@Component
 export default class Seller extends Vue {
   readonly $appDB!: FirebaseFirestore;
   readonly $appAuth!: FirebaseAuth;

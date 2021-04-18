@@ -14,7 +14,7 @@
                   label="Password" v-model="uPass" :rules="pwRules" />
               </v-col>
               <v-col cols="auto">
-                <v-btn outlined :disabled="!dataReady">Login</v-btn>
+                <v-btn v-on:click="authenticate" outlined :disabled="!dataReady">Login</v-btn>
                 <v-btn v-on:click="createAccount" :disabled="noInput">Sign Up</v-btn>
               </v-col>
             </v-row>
@@ -69,7 +69,7 @@ createAccount(): void {
     .createUserWithEmailAndPassword(this.uMail, this.uPass)
     .then((u: UserCredential) => {
       this.showMessage(`User create UID ${u.user?.uid}`);
-      this.$router.push({ name: "Category" });
+      this.showMessage(`Please sign in with your email: ${u.user?.email}`);
     })
     .catch((err: any) => {
       this.showMessage(`Unable to create account ${err}`);
@@ -81,7 +81,13 @@ authenticate(): void {
     .signInWithEmailAndPassword(this.uMail, this.uPass)
     .then((u: UserCredential) => {
       this.showMessage(`Login successful UID ${u.user?.uid}`);
-      this.$router.push({ name: "Expenses" });
+      if (`${u.user?.email}`.includes("@takearide.com")){
+        this.$router.push({ name: "Seller Vue" });
+      }
+      else{
+        this.$router.push({ name: "Client Vue" });
+      }
+      console.log(u);
     })
     .catch((err: any) => {
       this.showMessage(`Unable to login ${err}`);
