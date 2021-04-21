@@ -5,7 +5,9 @@
     </div>
     <button v-on:click="goBack()">Go Back</button>
     <AddCar></AddCar>
+    <div>
     <Reservations></Reservations>
+    </div>
   </div>
 </template>
 

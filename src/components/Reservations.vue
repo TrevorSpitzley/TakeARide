@@ -18,7 +18,8 @@
         </tr>
       </tbody>
     </table> -->
-    <!-- <v-data-table :headers="hArray" :items="resArr"> </v-data-table> -->
+    {{resArr.length}}<p>res array length</p>
+    <v-data-table :headers="hArray" :items="resArr"> </v-data-table>
   </div>
 </template>
 
@@ -55,6 +56,7 @@ export default class Reservations extends Vue {
           if (qds.exists) {
             //changed from const to var
             var rtn = qds.data();
+            console.log("testing", rtn)
             this.resArr.push({
               carMake: rtn.make,
               carModel: rtn.model,
