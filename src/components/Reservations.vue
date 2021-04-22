@@ -1,6 +1,6 @@
 <template>
   <div id="contents">
-    <!-- <table>
+    <table>
       <thead>
         <th>Make</th>
         <th>Model</th>
@@ -17,9 +17,9 @@
           <td>{{x.status}}</td>
         </tr>
       </tbody>
-    </table> -->
-    {{resArr.length}}<p>res array length</p>
-    <v-data-table :headers="hArray" :items="resArr"> </v-data-table>
+    </table>
+    <!-- {{resArr.length}}<p>res array length</p>
+    <v-data-table :headers="hArray" :items="resArr"> </v-data-table> -->
   </div>
 </template>
 
@@ -72,3 +72,31 @@ export default class Reservations extends Vue {
 </script>
 
 <style scoped></style>
+<style scoped>
+#contents {
+  display: inline-block;
+  border: 2px solid hsl(281, 90%, 50%);
+  border-radius: 0.5em;
+  padding: 1em;
+  margin: 0.6em;
+  box-shadow: 3px 5px 6px 7px hsla(271, 55%, 50%, 0.4);
+  align-items:center;
+  text-align: center;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin-top: 7em;
+}
+thead {
+ text-decoration: underline; 
+ background-color: white;
+}
+
+tbody tr:nth-child(even) {
+background-color: plum;
+}
+tbody tr:nth-child(odd) {
+background-color: palevioletred;
+}
+
+</style>

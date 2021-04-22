@@ -1,4 +1,6 @@
 <template>
+<div id="background" >
+  <span class="bg"></span>
   <div id="AppLogin">
     <v-container fluid class="red darken-2 my-4">
       <v-row class="green lighten-3 ma-1" justify="center">
@@ -24,6 +26,7 @@
     </v-container>
     <div>{{message}}</div>
   </div>
+</div>
 </template>
 <script lang="ts">
 
@@ -104,7 +107,7 @@ showMessage(m: string): void {
 }
 </script>
 
-<style scoped>
+<style scoped >
 #AppLogin{
   display: inline-block;
   text-align: right;
@@ -112,5 +115,20 @@ showMessage(m: string): void {
   padding: 1em;
   margin: 0.6em;
 }
-
+.bg{
+   width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  background-image: url('/src/assets/wallpaper.jpg') 
+  no-repeat center center;
+    background-size: cover;
+    transform: scale(1.1);
+}
+#background{
+  background-image: url('/src/assets/wallpaper.jpg') 
+  no-repeat center center fixed !important;;
+    background-size: cover; 
+}
 </style>

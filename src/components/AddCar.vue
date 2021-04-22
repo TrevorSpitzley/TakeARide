@@ -2,7 +2,7 @@
   <div id="contents">
     <h2 id="title">Add New Car</h2>
     <br />
-    <v-container fluid class="black darken-2 my-4">
+    <v-container class="black darken-2 my-4">
       <v-row class="purple lighten-2 ma-1" justify="center">
         <v-sheet elevation="5" class="pa-10 my-3">
           <v-form v-model="dataReady">
@@ -92,12 +92,15 @@ export default class AddCar extends Vue {
 </script>
 
 <style scoped>
-#contents {
-  border: 1px solid black;
-  border-radius: 5%;
-}
 
 #title {
   text-decoration: underline;
+}
+#contents{
+  display: inline-block;
+  text-align: right;
+  border-radius: 0.5em;
+  padding: 1em;
+  margin: 0.6em;
 }
 </style>
