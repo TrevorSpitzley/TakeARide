@@ -4,10 +4,10 @@ import firebase from "firebase/app"
 import "firebase/firestore"
 import "firebase/auth"
 import { AppRouter } from "./app-routing";
-import Vuetify from 'vuetify'
-import 'vuetify/dist/vuetify.min.css'
+import Vuetify from 'vuetify';
+import 'vuetify/dist/vuetify.min.css';
 import vuetify from './plugins/vuetify';
-Vue.use(Vuetify)
+Vue.use(Vuetify);
 
 Vue.config.productionTip = false
 
