@@ -9,14 +9,23 @@
         <th>Status</th>
       </thead>
       <tbody>
-        <tr v-for="(x,pos) in resArr" :key="pos">
-          <td>{{x.carMake}}</td>
-          <td>{{x.carModel}}</td>
-          <td>{{x.carYear}}</td>
-          <td>{{x.carColor}}</td>
-          <td>{{x.status}}</td>
+        <tr v-for="(x, pos) in resArr" :key="pos">
+          <td>{{ x.carMake }}</td>
+          <td>{{ x.carModel }}</td>
+          <td>{{ x.carYear }}</td>
+          <td>{{ x.carColor }}</td>
+          <td>{{ x.status }}</td>
+          <td>
+            <button v-if="x.boolStatus" v-on:click="backToMarket(x)">
+              Not being used
+            </button>
+            <button v-if="!x.boolStatus" v-on:click="backToMarket(x)">
+              Currently in use 
+            </button>
+          </td>
         </tr>
       </tbody>
+    </table>
     <!-- {{resArr.length}}<p>res array length</p>
     <v-data-table :headers="hArray" :items="resArr"> </v-data-table> -->
   </div>
@@ -39,10 +48,31 @@ export default class Reservations extends Vue {
   $router: any;
 
   hArray = [
-    { text: "Car Make", value: 'carMake' },
-    { text: "Car Model", value: 'carModel' },
+    { text: "Car Make", value: "carMake" },
+    { text: "Car Model", value: "carModel" },
   ];
   resArr: any[] = [];
+
+  checkCar(x: any): boolean {
+    return !x.boolStatus;
+  }
+
+  printShit(): void{
+    console.log(this.resArr);
+  }
+
+  backToMarket(x: any): void {
+    if (x.name.length > 0 && x.boolStatus === false) {
+      this.$appDB
+        .collection("users/test/seller_cars")
+        .doc(x.name)
+        .update({
+          status: "Open",
+          //To make the rent button disappear
+          boolStatus: true,
+        });
+    }
+  }
 
   //Draws data on load
   mounted(): void {
@@ -55,13 +85,15 @@ export default class Reservations extends Vue {
           if (qds.exists) {
             //changed from const to var
             var rtn = qds.data();
-            console.log("testing", rtn)
+            console.log("testing", rtn.boolStatus);
             this.resArr.push({
               carMake: rtn.make,
               carModel: rtn.model,
               carYear: rtn.year,
               carColor: rtn.color,
               status: rtn.status,
+              boolStatus: rtn.boolStatus,
+              name: rtn.name,
             });
           }
         });
@@ -79,7 +111,7 @@ export default class Reservations extends Vue {
   padding: 1em;
   margin: 0.6em;
   box-shadow: 3px 5px 6px 7px hsla(271, 55%, 50%, 0.4);
-  align-items:center;
+  align-items: center;
   text-align: center;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -87,15 +119,14 @@ export default class Reservations extends Vue {
   margin-top: 7em;
 }
 thead {
- text-decoration: underline; 
- background-color: white;
+  text-decoration: underline;
+  background-color: white;
 }
 
 tbody tr:nth-child(even) {
-background-color: plum;
+  background-color: plum;
 }
 tbody tr:nth-child(odd) {
-background-color: palevioletred;
+  background-color: palevioletred;
 }
-
 </style>
