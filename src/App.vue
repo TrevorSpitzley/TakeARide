@@ -4,7 +4,6 @@
     <img alt="Vue logo" src="./assets/logo.png" />
     <!-- <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" /> -->
     <v-main>
-      <Reservations></Reservations>
           <router-view></router-view>
     </v-main>
   </div>
@@ -20,7 +19,7 @@ export default Vue.extend({
   name: 'App',
 
   components: {
-    Reservations,
+    //
   },
 
   data: () => ({

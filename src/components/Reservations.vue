@@ -18,8 +18,8 @@
         </tr>
       </tbody>
     </table> -->
-    {{resArr.length}}<p>res array length</p>
-    <v-data-table :headers="hArray" :items="resArr"> </v-data-table>
+    <!-- {{resArr.length}}<p>res array length</p>
+    <v-data-table :headers="hArray" :items="resArr"> </v-data-table> -->
   </div>
 </template>
 

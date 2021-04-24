@@ -18,10 +18,18 @@
           <td>{{ x.carColor }}</td>
           <td>{{ x.status }}</td>
           <td>{{ x.owner }}</td>
-          <td><button v-if="x.boolStatus" v-on:click="goToCar(x)">Reserve this car</button></td>
+          <td>
+            <button v-if="x.boolStatus" v-on:click="pickThisCar(x)">
+              Reserve this car
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>
+    <div v-if="carPicked" id="checkout">
+      <Checkout v-bind:currCar="chosenCar"></Checkout>
+      <div id="buttons"><button v-on:click="rentThisCar(chosenCar)">Rent Me!</button><button v-on:click="goBackToList()">Not Interested</button></div>
+    </div>
   </div>
 </template>
 
@@ -35,15 +43,33 @@ import { QuerySnapshot } from "@firebase/firestore-types";
 import { FirebaseAuth } from "@firebase/auth-types";
 import "firebase/auth";
 
-@Component
-export default class Checkout extends Vue {
+import Checkout from "./Checkout.vue";
+
+@Component({
+  components: {
+    Checkout,
+  },
+})
+// @Component
+export default class CarsNearby extends Vue {
   readonly $appDB!: FirebaseFirestore;
   readonly $appAuth!: FirebaseAuth;
   $router: any;
   private resArr: any[] = [];
+  private chosenCar: any;
+  private carPicked = false;
 
-  goToCar(x: any): void {
-    this.$router.push({ path: "/CarInfo" })
+  goBackToList(): void {
+    this.carPicked = false;
+  }
+
+  rentThisCar(x: any): void {
+    console.log(x);
+  }
+
+  pickThisCar(x: any): void {
+    this.chosenCar = x;
+    this.carPicked = true;
   }
 
   mounted(): void {
