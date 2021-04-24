@@ -15,6 +15,7 @@
           <td>{{ currCar.carModel }}</td>
           <td>{{ currCar.carYear }}</td>
           <td>{{ currCar.carColor }}</td>
+          <td>{{ currCar.status }}</td>
           <td>{{ currCar.owner }}</td>
         </tr>
       </tbody>

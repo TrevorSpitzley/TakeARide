@@ -20,7 +20,7 @@
               Not being used
             </button>
             <button v-if="!x.boolStatus" v-on:click="backToMarket(x)">
-              Currently in use 
+              Currently in use
             </button>
           </td>
         </tr>
@@ -46,6 +46,7 @@ export default class Reservations extends Vue {
   readonly $appDB!: FirebaseFirestore;
   readonly $appAuth!: FirebaseAuth;
   $router: any;
+  private sellerID = this.$appAuth.currentUser!.email;
 
   hArray = [
     { text: "Car Make", value: "carMake" },
@@ -57,14 +58,14 @@ export default class Reservations extends Vue {
     return !x.boolStatus;
   }
 
-  printShit(): void{
+  printShit(): void {
     console.log(this.resArr);
   }
 
   backToMarket(x: any): void {
     if (x.name.length > 0 && x.boolStatus === false) {
       this.$appDB
-        .collection("users/test/seller_cars")
+        .collection(`users/test/seller_cars`)
         .doc(x.name)
         .update({
           status: "Open",
@@ -86,15 +87,18 @@ export default class Reservations extends Vue {
             //changed from const to var
             var rtn = qds.data();
             console.log("testing", rtn.boolStatus);
-            this.resArr.push({
-              carMake: rtn.make,
-              carModel: rtn.model,
-              carYear: rtn.year,
-              carColor: rtn.color,
-              status: rtn.status,
-              boolStatus: rtn.boolStatus,
-              name: rtn.name,
-            });
+            if (rtn.owner === this.sellerID!.split('@')[0]) {
+              this.resArr.push({
+                carMake: rtn.make,
+                carModel: rtn.model,
+                carYear: rtn.year,
+                carColor: rtn.color,
+                owner: rtn.owner,
+                status: rtn.status,
+                boolStatus: rtn.boolStatus,
+                name: rtn.name,
+              });
+            }
           }
         });
       });

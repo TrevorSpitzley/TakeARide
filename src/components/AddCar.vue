@@ -71,6 +71,7 @@ export default class AddCar extends Vue {
   readonly $appDB!: FirebaseFirestore;
   readonly $appAuth!: FirebaseAuth;
   $router: any;
+  private sellerID = this.$appAuth.currentUser!.email;
 
   private carMake = "";
   private carModel = "";
@@ -85,7 +86,7 @@ export default class AddCar extends Vue {
       year: this.carYear,
       color: this.carColor,
       status: "Open",
-      owner: "Test",
+      owner: this.sellerID!.split('@')[0],
       boolStatus: true,
       name: docName,
     });
