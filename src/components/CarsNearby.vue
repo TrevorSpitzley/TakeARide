@@ -11,7 +11,7 @@
         <th>Owner</th>
       </thead>
       <tbody>
-        <tr v-for="(x, pos) in resArr" :key="pos">
+        <tr v-for="(x, pos) in resArr" :key="pos" v-bind:class="`${getColor(x)}`">
           <td>{{ x.carMake }}</td>
           <td>{{ x.carModel }}</td>
           <td>{{ x.carYear }}</td>
@@ -28,7 +28,10 @@
     </table>
     <div v-if="carPicked" id="checkout">
       <Checkout v-bind:currCar="chosenCar"></Checkout>
-      <div id="buttons"><button v-on:click="rentThisCar(chosenCar)">Rent Me!</button><button v-on:click="goBackToList()">Not Interested</button></div>
+      <div id="buttons">
+        <button v-on:click="rentThisCar(chosenCar)">Rent Me!</button
+        ><button v-on:click="goBackToList()">Not Interested</button>
+      </div>
     </div>
   </div>
 </template>
@@ -58,17 +61,33 @@ export default class CarsNearby extends Vue {
   private resArr: any[] = [];
   private chosenCar: any;
   private carPicked = false;
+  private docName!: string;
 
   goBackToList(): void {
     this.carPicked = false;
+    this.chosenCar = null;
+    this.docName = "";
   }
 
   rentThisCar(x: any): void {
-    console.log(x);
+    if (this.docName!.length > 0 && x.status === "Open") {
+      this.$appDB
+        .collection("users/test/seller_cars")
+        .doc(this.docName)
+        .update({
+          status: "Closed",
+          //To make the rent button disappear
+          boolStatus: false,
+        });
+    }
+    this.goBackToList()
   }
 
   pickThisCar(x: any): void {
+    console.log(x)
+    console.log(x.name)
     this.chosenCar = x;
+    this.docName = x.name;
     this.carPicked = true;
   }
 
@@ -90,12 +109,30 @@ export default class CarsNearby extends Vue {
               status: rtn.status,
               owner: rtn.owner,
               boolStatus: rtn.boolStatus,
+              name: rtn.name,
             });
           }
         });
       });
   }
+
+  getColor(art: any) {
+    if (art.status === "Closed")
+      return "red";
+  }
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+thead {
+ text-decoration: underline; 
+ background-color: white;
+}
+
+tbody tr:nth-child(even) {
+background-color: lightskyblue;
+}
+tbody tr:nth-child(odd) {
+background-color: palevioletred;
+}
+</style>

@@ -78,7 +78,8 @@ export default class AddCar extends Vue {
   private carColor = "";
 
   addCar(): void {
-    this.$appDB.collection(`users/test/seller_cars`).add({
+    const docName = `${this.carMake},${this.carModel},${this.carYear}`;
+    this.$appDB.collection(`users/test/seller_cars`).doc(docName).set({
       make: this.carMake,
       model: this.carModel,
       year: this.carYear,
@@ -86,6 +87,7 @@ export default class AddCar extends Vue {
       status: "Open",
       owner: "Test",
       boolStatus: true,
+      name: docName,
     });
   }
 }
