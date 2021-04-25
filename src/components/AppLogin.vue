@@ -1,9 +1,8 @@
 <template>
-<div id="background" >
-  <span class="bg"></span>
-  <div id="AppLogin">
-    <v-container fluid class="red darken-2 my-4">
-      <v-row class="green lighten-3 ma-1" justify="center">
+<v-parallax height="1000" src="https://wallpaperaccess.com/full/813245.jpg">
+  <div id="AppLogin" align="center">
+    <v-container>
+      <v-row>
         <v-sheet elevation="4" class="pa-3 my-3">
           <v-form v-model="dataReady">
             <v-row class="flex-column" align="end">
@@ -26,7 +25,7 @@
     </v-container>
     <div>{{message}}</div>
   </div>
-</div>
+</v-parallax>
 </template>
 <script lang="ts">
 
@@ -112,23 +111,10 @@ showMessage(m: string): void {
   display: inline-block;
   text-align: right;
   border-radius: 0.5em;
-  padding: 1em;
-  margin: 0.6em;
+  margin-left:auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: 35%;
 }
-.bg{
-   width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-  background-image: url('/src/assets/wallpaper.jpg') 
-  no-repeat center center;
-    background-size: cover;
-    transform: scale(1.1);
-}
-#background{
-  background-image: url('/src/assets/wallpaper.jpg') 
-  no-repeat center center fixed !important;;
-    background-size: cover; 
-}
+
 </style>

@@ -1,11 +1,11 @@
 <template>
   <div id="contents">
-    <h2 id="title">Add New Car</h2>
     <br />
     <v-container class="black darken-2 my-4">
       <v-row class="purple lighten-2 ma-1" justify="center">
         <v-sheet elevation="5" class="pa-10 my-3">
           <v-form v-model="dataReady">
+            <h3 id="title" >Add New Car</h3>
             <v-row class="flex-column" align="end">
               <v-col>
                 <v-text-field
@@ -98,6 +98,7 @@ export default class AddCar extends Vue {
 
 #title {
   text-decoration: underline;
+  text-align: center;
 }
 #contents{
   display: inline-block;

@@ -1,18 +1,18 @@
 <template>
  <v-app>
-    <!-- <v-navigation-drawer v-model="sidebar" app>
+    <v-navigation-drawer v-model="sidebar" app>
       <v-list>
-        <v-list-tile
+        <v-list-item
           v-for="item in menuItems"
           :key="item.title"
           :to="item.path">
-          <v-list-tile-action>
+          <v-list-item-action>
             <v-icon>{{ item.icon }}</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>{{ item.title }}</v-list-tile-content>
-        </v-list-tile>
+          </v-list-item-action>
+          <v-list-item-content>{{ item.title }}</v-list-item-content>
+        </v-list-item>
       </v-list>
-    </v-navigation-drawer> -->
+    </v-navigation-drawer>
 
     <v-app-bar app>
       <span class="hidden-sm-and-up">
@@ -37,7 +37,7 @@
       </v-toolbar-items>
     </v-app-bar>
 
-    <v-main>
+    <v-content>
        <div id="area">
       <section>
         <AddCar></AddCar>
@@ -46,7 +46,7 @@
         <Reservations></Reservations>
       </section>
     </div>
-    </v-main>
+    </v-content>
        
   </v-app>
 
@@ -103,8 +103,9 @@ export default {
       appTitle: 'Take A Ride',
       sidebar: false,
       menuItems: [
-          { title: 'Seller', path: '/Seller',},
           { title: 'Client', path: '/Client',},
+          { title: 'Seller', path: '/Seller',},
+          { title: 'Logout', path: '/', icon: 'mdi-logout'},
      ]
     }
   },
