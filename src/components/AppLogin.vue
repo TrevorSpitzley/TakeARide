@@ -1,5 +1,6 @@
 <template>
 <v-parallax height="1000" src="https://wallpaperaccess.com/full/813245.jpg">
+  <h1>Welcome to <br> Take-A-Ride</h1>
   <div id="AppLogin" align="center">
     <v-container>
       <v-row>
@@ -114,7 +115,12 @@ showMessage(m: string): void {
   margin-left:auto;
   margin-right: auto;
   margin-top: auto;
-  margin-bottom: 35%;
+  margin-bottom: 50em;
 }
-
+h1 {
+  margin-top: 5em;
+  text-align: center;
+  color: rgb(0, 0, 0);
+  font-family: Arial, Helvetica, sans-serif;
+}
 </style>
