@@ -78,7 +78,7 @@ import "firebase/auth";
 
 import AddCar from "./AddCar.vue";
 import Reservations from "./Reservations.vue";
-
+import ClientMirror from "./ClientMirror.vue";
 
 
 //@Component
@@ -96,6 +96,7 @@ export default {
   components: {
     AddCar,
      Reservations,
+     ClientMirror,
   },
   
   data(){
@@ -103,7 +104,7 @@ export default {
       appTitle: 'Take A Ride',
       sidebar: false,
       menuItems: [
-          { title: 'Client', path: '/Client',},
+          { title: 'Client', path: '/ClientMirror',},
           { title: 'Seller', path: '/Seller',},
           { title: 'Logout', path: '/', icon: 'mdi-logout'},
      ]

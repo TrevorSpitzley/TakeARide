@@ -22,6 +22,12 @@ const myRoutes: Array<RouteConfig> = [
     path: "/Client",
     component: Client,
   },
+  {
+    name: "ClientMirror Vue",
+    path: "/ClientMirror",
+    component: Client,
+  },
+
 ];
 
 export const AppRouter = new VueRouter({
