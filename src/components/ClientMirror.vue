@@ -67,7 +67,7 @@ export default {
       appTitle: 'Take A Ride',
       sidebar: false,
       menuItems: [
-          { title: 'Client', path: '/ClientMirror',},
+         { title: 'Client', path: '/ClientMirror',},
           { title: 'Seller', path: '/Seller',},
           { title: 'Logout', path: '/', icon: 'mdi-logout'},
      ]

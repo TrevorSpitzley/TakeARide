@@ -3,6 +3,7 @@ import VueRouter, { RouteConfig } from "vue-router";
 import AppLogin from './components/AppLogin.vue';
 import Seller from './components/Seller.vue';
 import Client from './components/Client.vue';
+import ClientMirror from './components/ClientMirror.vue';
 import Checkout from './components/Checkout.vue';
 Vue.use(VueRouter);
 
@@ -25,7 +26,7 @@ const myRoutes: Array<RouteConfig> = [
   {
     name: "ClientMirror Vue",
     path: "/ClientMirror",
-    component: Client,
+    component: ClientMirror,
   },
 
 ];

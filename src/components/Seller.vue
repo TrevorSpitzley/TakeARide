@@ -78,7 +78,7 @@ import "firebase/auth";
 
 import AddCar from "./AddCar.vue";
 import Reservations from "./Reservations.vue";
-import ClientMirror from "./ClientMirror.vue";
+
 
 
 //@Component
@@ -96,7 +96,6 @@ export default {
   components: {
     AddCar,
      Reservations,
-     ClientMirror,
   },
   
   data(){
