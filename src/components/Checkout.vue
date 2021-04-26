@@ -40,4 +40,21 @@ export default class Checkout extends Vue {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+#contents {
+  padding-top: 5em;
+}
+thead {
+  text-decoration: underline;
+  background-color: white;
+}
+tbody {
+  border: 2px solid hsl(281, 90%, 50%);
+  border-radius: 0.5em;
+  box-shadow: 3px 5px 6px 7px hsla(271, 55%, 50%, 0.4);
+}
+tbody td {
+  border: 2px solid black;
+  background-color: lightskyblue;
+}
+</style>

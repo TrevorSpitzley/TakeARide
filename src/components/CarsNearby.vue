@@ -1,40 +1,43 @@
 <template>
-  <div id="contents">
-    <h2>Available Cars!</h2>
-    <table>
-      <thead>
-        <th>Make</th>
-        <th>Model</th>
-        <th>Year</th>
-        <th>Color</th>
-        <th>Status</th>
-        <th>Owner</th>
-      </thead>
-      <tbody>
-        <tr
-          v-for="(x, pos) in resArr"
-          :key="pos"
-          v-bind:class="`${getColor(x)}`"
-        >
-          <td>{{ x.carMake }}</td>
-          <td>{{ x.carModel }}</td>
-          <td>{{ x.carYear }}</td>
-          <td>{{ x.carColor }}</td>
-          <td>{{ x.status }}</td>
-          <td>{{ x.owner }}</td>
-          <td>
-            <button v-if="x.boolStatus" v-on:click="pickThisCar(x)">
-              Reserve this car
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <div v-if="carPicked" id="checkout">
-      <Checkout v-bind:currCar="chosenCar"></Checkout>
-      <div id="buttons">
-        <button v-on:click="rentThisCar(chosenCar)">Rent Me!</button
-        ><button v-on:click="goBackToList()">Not Interested</button>
+  <div class="id">
+    <div id="contents">
+      <h2>Available Cars!</h2>
+      <table>
+        <thead>
+          <th>Make</th>
+          <th>Model</th>
+          <th>Year</th>
+          <th>Color</th>
+          <th>Status</th>
+          <th>Owner</th>
+          <th>Click here to reserve!</th>
+        </thead>
+        <tbody>
+          <tr
+            v-for="(x, pos) in resArr"
+            :key="pos"
+            v-bind:class="`${getColor(x)}`"
+          >
+            <td>{{ x.carMake }}</td>
+            <td>{{ x.carModel }}</td>
+            <td>{{ x.carYear }}</td>
+            <td>{{ x.carColor }}</td>
+            <td>{{ x.status }}</td>
+            <td>{{ x.owner }}</td>
+            <td>
+              <button v-if="x.boolStatus" v-on:click="pickThisCar(x)">
+                Reserve this car
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div v-if="carPicked" id="checkout">
+        <Checkout v-bind:currCar="chosenCar"></Checkout>
+        <div class="buttons">
+          <button v-on:click="rentThisCar(chosenCar)">Rent Me!</button>
+          <button v-on:click="goBackToList()">Not Interested</button>
+        </div>
       </div>
     </div>
   </div>
@@ -127,15 +130,31 @@ export default class CarsNearby extends Vue {
 </script>
 
 <style scoped>
+.id {
+  text-align: center;
+}
+#contents {
+  margin-right: auto;
+  margin-left: auto;
+  display: inline-block;
+}
+div.buttons button {
+  border: 2px solid hsl(281, 90%, 50%);
+  border-radius: 0.5em;
+  box-shadow: 3px 5px 6px 7px hsla(271, 55%, 50%, 0.4);
+  background-color: lightskyblue;
+}
 thead {
   text-decoration: underline;
   background-color: white;
 }
-
-tbody tr:nth-child(even) {
-  background-color: lightskyblue;
+tbody {
+  border: 2px solid hsl(281, 90%, 50%);
+  border-radius: 0.5em;
+  box-shadow: 3px 5px 6px 7px hsla(271, 55%, 50%, 0.4);
 }
-tbody tr:nth-child(odd) {
-  background-color: palevioletred;
+tbody td {
+  border: 2px solid black;
+  background-color: lightskyblue;
 }
 </style>

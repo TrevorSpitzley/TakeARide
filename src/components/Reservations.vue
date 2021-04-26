@@ -7,25 +7,32 @@
         <th>Year</th>
         <th>Color</th>
         <th>Status</th>
+        <th>Remove Listing</th>
       </thead>
       <tbody>
-        <tr v-for="(x, pos) in resArr" :key="pos">
+        <tr v-for="(x, pos) in resArr" :key="pos" v-bind:class="`${getColor(x)}`">
           <td>{{ x.carMake }}</td>
           <td>{{ x.carModel }}</td>
           <td>{{ x.carYear }}</td>
           <td>{{ x.carColor }}</td>
-          <td>{{ x.status }}</td>
           <td>
-            <button v-if="x.boolStatus" v-on:click="backToMarket(x)">
-              Not being used
-            </button>
             <button v-if="!x.boolStatus" v-on:click="backToMarket(x)">
-              Currently in use
+              Re-Open Status
+            </button>
+            <label v-if="x.boolStatus">
+              Not currently reserved
+            </label>
+          </td>
+
+          <td>
+            <button v-on:click="deleteListing(x)">
+              Remove Listing
             </button>
           </td>
         </tr>
       </tbody>
     </table>
+    <div>{{ message }}</div>
     <!-- {{resArr.length}}<p>res array length</p>
     <v-data-table :headers="hArray" :items="resArr"> </v-data-table> -->
   </div>
@@ -46,20 +53,16 @@ export default class Reservations extends Vue {
   readonly $appDB!: FirebaseFirestore;
   readonly $appAuth!: FirebaseAuth;
   $router: any;
+  private message = "";
   private sellerID = this.$appAuth.currentUser!.email;
-
-  hArray = [
-    { text: "Car Make", value: "carMake" },
-    { text: "Car Model", value: "carModel" },
-  ];
   resArr: any[] = [];
 
   checkCar(x: any): boolean {
     return !x.boolStatus;
   }
 
-  printShit(): void {
-    console.log(this.resArr);
+  getColor(art: any) {
+    if (art.status === "Closed") return "red";
   }
 
   backToMarket(x: any): void {
@@ -75,6 +78,28 @@ export default class Reservations extends Vue {
     }
   }
 
+  deleteListing(x: any): void {
+    if (x.name.length > 0 && this.resArr.length > 1) {
+      this.$appDB
+        .collection(`users/test/seller_cars`)
+        .doc(x.name)
+        .delete();
+    }
+    if (this.resArr.length <= 1) {
+      this.showMessage(
+        `Cannot remove only listing. Must have one listing at all times.`
+      );
+    }
+  }
+
+  showMessage(m: string): void {
+    this.message = m;
+    setTimeout(() => {
+      // Auto disappear after 5 seconds
+      this.message = "";
+    }, 5000);
+  }
+
   //Draws data on load
   mounted(): void {
     this.$appDB
@@ -87,7 +112,7 @@ export default class Reservations extends Vue {
             //changed from const to var
             var rtn = qds.data();
             console.log("testing", rtn.boolStatus);
-            if (rtn.owner === this.sellerID!.split('@')[0]) {
+            if (rtn.owner === this.sellerID!.split("@")[0]) {
               this.resArr.push({
                 carMake: rtn.make,
                 carModel: rtn.model,
@@ -126,11 +151,12 @@ thead {
   text-decoration: underline;
   background-color: white;
 }
+tbody td {
+  border: 2px solid black;
+  background-color: lightskyblue;
+}
+tbody tr {
+  background-color: lightskyblue;
+}
 
-tbody tr:nth-child(even) {
-  background-color: plum;
-}
-tbody tr:nth-child(odd) {
-  background-color: palevioletred;
-}
 </style>
