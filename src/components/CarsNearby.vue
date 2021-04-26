@@ -11,7 +11,11 @@
         <th>Owner</th>
       </thead>
       <tbody>
-        <tr v-for="(x, pos) in resArr" :key="pos" v-bind:class="`${getColor(x)}`">
+        <tr
+          v-for="(x, pos) in resArr"
+          :key="pos"
+          v-bind:class="`${getColor(x)}`"
+        >
           <td>{{ x.carMake }}</td>
           <td>{{ x.carModel }}</td>
           <td>{{ x.carYear }}</td>
@@ -80,12 +84,12 @@ export default class CarsNearby extends Vue {
           boolStatus: false,
         });
     }
-    this.goBackToList()
+    this.goBackToList();
   }
 
   pickThisCar(x: any): void {
-    console.log(x)
-    console.log(x.name)
+    console.log(x);
+    console.log(x.name);
     this.chosenCar = x;
     this.docName = x.name;
     this.carPicked = true;
@@ -117,22 +121,21 @@ export default class CarsNearby extends Vue {
   }
 
   getColor(art: any) {
-    if (art.status === "Closed")
-      return "red";
+    if (art.status === "Closed") return "red";
   }
 }
 </script>
 
 <style scoped>
 thead {
- text-decoration: underline; 
- background-color: white;
+  text-decoration: underline;
+  background-color: white;
 }
 
 tbody tr:nth-child(even) {
-background-color: lightskyblue;
+  background-color: lightskyblue;
 }
 tbody tr:nth-child(odd) {
-background-color: palevioletred;
+  background-color: palevioletred;
 }
 </style>
