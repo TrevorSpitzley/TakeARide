@@ -57,7 +57,7 @@ import { Component, Vue, Prop, } from "vue-property-decorator";
 import CarsNearby from './CarsNearby.vue';
 
 export default {
-  name: "Client",
+  name: "ClientMirror",
   components: {
      CarsNearby,
   },
@@ -67,6 +67,8 @@ export default {
       appTitle: 'Take A Ride',
       sidebar: false,
       menuItems: [
+         { title: 'Client', path: '/ClientMirror',},
+          { title: 'Seller', path: '/Seller',},
           { title: 'Logout', path: '/', icon: 'mdi-logout'},
      ]
     }
