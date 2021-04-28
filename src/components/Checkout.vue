@@ -6,6 +6,7 @@
         <th>Model</th>
         <th>Year</th>
         <th>Color</th>
+        <th>Price Per Hour</th>
         <th>Status</th>
         <th>Owner</th>
       </thead>
@@ -15,6 +16,7 @@
           <td>{{ currCar.carModel }}</td>
           <td>{{ currCar.carYear }}</td>
           <td>{{ currCar.carColor }}</td>
+          <td>${{ currCar.pricePerHour }}.00</td>
           <td>{{ currCar.status }}</td>
           <td>{{ currCar.owner }}</td>
         </tr>

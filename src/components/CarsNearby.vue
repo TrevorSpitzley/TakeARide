@@ -8,6 +8,7 @@
           <th>Model</th>
           <th>Year</th>
           <th>Color</th>
+          <th>Price Per Hour</th>
           <th>Status</th>
           <th>Owner</th>
           <th>Click here to reserve!</th>
@@ -22,6 +23,7 @@
             <td>{{ x.carModel }}</td>
             <td>{{ x.carYear }}</td>
             <td>{{ x.carColor }}</td>
+            <td>${{ x.pricePerHour }}.00</td>
             <td>{{ x.status }}</td>
             <td>{{ x.owner }}</td>
             <td>
@@ -93,7 +95,7 @@ export default class CarsNearby extends Vue {
   pickThisCar(x: any): void {
     // console.log(x);
     // console.log(x.name);
-    if (this.chosenCar){
+    if (this.chosenCar) {
       this.chosenCar = null;
       this.docName = "";
       this.carPicked = false;
@@ -122,6 +124,7 @@ export default class CarsNearby extends Vue {
               owner: rtn.owner,
               boolStatus: rtn.boolStatus,
               name: rtn.name,
+              pricePerHour: rtn.pricePerHour,
             });
           }
         });

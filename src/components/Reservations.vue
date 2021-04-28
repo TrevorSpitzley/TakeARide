@@ -6,6 +6,7 @@
         <th>Model</th>
         <th>Year</th>
         <th>Color</th>
+        <th>Price Per Hour</th>
         <th>Status</th>
         <th>Remove Listing</th>
       </thead>
@@ -15,6 +16,7 @@
           <td>{{ x.carModel }}</td>
           <td>{{ x.carYear }}</td>
           <td>{{ x.carColor }}</td>
+          <td>${{ x.pricePerHour }}.00</td>
           <td>
             <button v-if="!x.boolStatus" v-on:click="backToMarket(x)">
               Re-Open Status
@@ -122,6 +124,7 @@ export default class Reservations extends Vue {
                 status: rtn.status,
                 boolStatus: rtn.boolStatus,
                 name: rtn.name,
+                pricePerHour: rtn.pricePerHour,
               });
             }
           }
