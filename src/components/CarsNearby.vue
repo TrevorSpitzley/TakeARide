@@ -91,8 +91,13 @@ export default class CarsNearby extends Vue {
   }
 
   pickThisCar(x: any): void {
-    console.log(x);
-    console.log(x.name);
+    // console.log(x);
+    // console.log(x.name);
+    if (this.chosenCar){
+      this.chosenCar = null;
+      this.docName = "";
+      this.carPicked = false;
+    }
     this.chosenCar = x;
     this.docName = x.name;
     this.carPicked = true;
